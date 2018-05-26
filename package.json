@@ -67,7 +67,7 @@
     "start-dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "prestart": "next build"
+    "prestart": "npm run build"
   },
   "jest": {
     "collectCoverageFrom": [
