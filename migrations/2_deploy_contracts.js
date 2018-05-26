@@ -1,9 +1,14 @@
-var RaffleFactory = artifacts.require("./RaffleFactory.sol");
-var Raffle = artifacts.require("./Raffle.sol");
-var AnyToken = artifacts.require("./AnyToken.sol");
+const RaffleFactory = artifacts.require("./RaffleFactory.sol");
+const Raffle = artifacts.require("./Raffle.sol");
+const CollectibleRegistry = artifacts.require("./CollectibleRegistry.sol");
+const AnyToken = artifacts.require("./AnyToken.sol");
 
-module.exports = function(deployer) {
-  deployer.deploy(RaffleFactory);
-  deployer.deploy(Raffle);
-  deployer.deploy(AnyToken);
+module.exports = async function(deployer) {
+  await deployer.deploy(CollectibleRegistry);
+
+  const CollectibleRegistry = CollectibleRegistry.deployed();
+  // deployer.deploy(RaffleFactory);
+  await deployer.deploy(RaffleFactory, CollectibleRegistry.address);
+  await deployer.deploy(Raffle);
+  await deployer.deploy(AnyToken);
 };
