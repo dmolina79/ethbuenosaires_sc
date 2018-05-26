@@ -1,3 +1,5 @@
+
+const BigNumber = require('bignumber.js');
 const AnyToken = artifacts.require("./AnyToken.sol");
 
 contract("AnyToken", async accounts => {
@@ -9,8 +11,8 @@ contract("AnyToken", async accounts => {
 
   xit("Mint Increasses supply", async accounts => {
     let instance = await AnyToken.deployed();
-    //await instance.mint();
+    await instance.mint();
     let totalSupply = await instance.totalSupply();
-    assert.equal(totalSupply, 1);
+    assert.equal(totalSupply.toNumber(), 1);
   });
 });
