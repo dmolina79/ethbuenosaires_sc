@@ -1,7 +1,12 @@
-var RaffleFactory = artifacts.require("./RaffleFactory.sol");
-var Raffle = artifacts.require("./Raffle.sol");
+const RaffleFactory = artifacts.require("./RaffleFactory.sol");
+const Raffle = artifacts.require("./Raffle.sol");
+const CollectibleRegistry = artifacts.require("./CollectibleRegistry.sol");
 
-module.exports = function(deployer) {
+module.exports = async function(deployer) {
+  await deployer.deploy(CollectibleRegistry);
+
+  const CollectibleRegistry = CollectibleRegistry.deployed();
   deployer.deploy(RaffleFactory);
   deployer.deploy(Raffle);
+  
 };
