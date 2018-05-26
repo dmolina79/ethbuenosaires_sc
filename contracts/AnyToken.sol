@@ -8,7 +8,7 @@ contract AnyToken is ERC721Token {
 
     constructor() ERC721Token("TOKEN_NAME", "TOKEN_SYMBOL") public {}
 
-    function mint() public {
+    function mint() public payable {
         _tokenCount++;
         super._mint(msg.sender, _tokenCount);
     }
