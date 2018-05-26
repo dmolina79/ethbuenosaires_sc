@@ -17,8 +17,15 @@ contract RaffleFactory is AragonApp {
         registry = CollectibleRegistry(_registryAddress);
     }
 
-    function createNewRaffle() public returns (address _newRaffleAddress) {
-        address raffleAddress = new Raffle();
+    function createNewRaffle(
+        bytes32 _collectibleContractId, 
+        uint tokenId
+    ) public returns (address _newRaffleAddress) {
+        require(registry.getCollectibleContract(_collectibleContractId) != address(0x0));
+
+        address erc721 = registry.getCollectibleContract(_collectibleContractId);
+
+        address raffleAddress = new Raffle(erc721, tokenId);
 
         emit RaffleCreated(msg.sender, raffleAddress);
         return raffleAddress;
