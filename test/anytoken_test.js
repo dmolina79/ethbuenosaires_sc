@@ -27,5 +27,9 @@ contract("AnyToken", async (accounts) => {
 
     let totalSupply = await instance.totalSupply.call();
     assert.equal(totalSupply.toNumber(), 1);
+
+    const tokenId = await instance.tokenOfOwnerByIndex(accounts[0], 0);
+    console.log('tokenId printed:', tokenId.toNumber());
+    assert(tokenId.toNumber());
   });
 });
