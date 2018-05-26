@@ -4,5 +4,5 @@ import "@aragon/os/contracts/apps/AragonApp.sol";
 
 
 contract Raffle is AragonApp {
-
+    
 }

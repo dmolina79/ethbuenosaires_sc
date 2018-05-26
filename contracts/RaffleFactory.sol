@@ -11,9 +11,10 @@ contract RaffleFactory is AragonApp {
     );
 
     function createNewRaffle() public returns (address _newRaffleAddress) {
-        address raffle = new Raffle();
+        address raffleAddress = new Raffle();
 
-        return raffle;
+        emit RaffleCreated(msg.sender, raffleAddress);
+        return raffleAddress;
     }
 
 }
