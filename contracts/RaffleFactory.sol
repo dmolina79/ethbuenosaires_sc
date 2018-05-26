@@ -1,10 +1,8 @@
 pragma solidity ^0.4.23;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 import "./CollectibleRegistry.sol";
 import "./Raffle.sol";
-
 
 contract RaffleFactory is AragonApp {
 
@@ -12,28 +10,35 @@ contract RaffleFactory is AragonApp {
 
     event RaffleCreated(
         address indexed raffleOwner, 
-        address indexed raffleAddress,
-        address indexed erc721Address,
-        uint tokenId
+        address indexed raffleAddress
     );
 
-    constructor(address _registryAddress) {
+    constructor(address _registryAddress) public {
         registry = CollectibleRegistry(_registryAddress);
     }
 
     function createNewRaffle(
-        address _erc721Address, 
-        uint _tokenId
-    ) public returns (address _newRaffleAddress) {
+        // Raffle data.
+        string _title,
+        string _orgName,
+        uint16 _length,
+        uint256 _ticketPrice,
+        uint32 _maxTickets,
+        uint256 _minThreshold,
+        // Asset data.
+        address _contractAddr,
+        uint256 _tokenId,
+        uint256 _price,
+        string _briefDescription) public returns (address _newRaffleAddress) {
 
-        ERC721 collectibleContract = ERC721(_erc721Address);
+        address raffleAddress = new Raffle(
+            // Raffle data.
+            msg.sender, _title, _orgName, _length, _ticketPrice, _maxTickets,
+            _minThreshold,
+            // Asset data.
+            _contractAddr, _tokenId, _price, _briefDescription);
 
-        require(collectibleContract.exists(_tokenId));
-        require(collectibleContract.ownerOf(_tokenId) == msg.sender);
-
-        address raffleAddress = new Raffle(_erc721Address, _tokenId);
-
-        emit RaffleCreated(msg.sender, raffleAddress, _erc721Address, _tokenId);
+        emit RaffleCreated(msg.sender, raffleAddress);
         return raffleAddress;
     }
 
