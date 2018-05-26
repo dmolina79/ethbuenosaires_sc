@@ -1,4 +1,5 @@
-var RaffleFactory = artifacts.require("./RaffleFactory.sol");
+const RaffleFactory = artifacts.require("./RaffleFactory.sol");
+const CollectibleRegistry = artifacts.require("./CollectibleRegistry.sol");
 
 contract('RaffleFactory', async (accounts) => {
   let contract;

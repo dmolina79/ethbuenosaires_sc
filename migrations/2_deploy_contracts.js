@@ -6,7 +6,8 @@ module.exports = async function(deployer) {
   await deployer.deploy(CollectibleRegistry);
 
   const CollectibleRegistry = CollectibleRegistry.deployed();
-  deployer.deploy(RaffleFactory);
-  deployer.deploy(Raffle);
+  // deployer.deploy(RaffleFactory);
+  await deployer.deploy(RaffleFactory, CollectibleRegistry.address);
+  await deployer.deploy(Raffle);
   
 };
