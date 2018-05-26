@@ -14,6 +14,9 @@ npm install -g truffle
 Uses:
 https://github.com/truffle-box/react-box
 
+Install Ganache:
+http://truffleframework.com/ganache/
+
 TODO:
 
 Contract TODOs:
