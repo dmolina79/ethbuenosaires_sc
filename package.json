@@ -63,7 +63,7 @@
     "react-dom": "^15.4.2"
   },
   "scripts": {
-    "start": "NODE_ENV=production node scripts/start.js",
+    "start": "node scripts/start.js",
     "start-dev": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
