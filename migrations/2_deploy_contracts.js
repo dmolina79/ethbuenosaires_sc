@@ -6,9 +6,9 @@ const AnyToken = artifacts.require("./AnyToken.sol");
 module.exports = async function(deployer) {
   await deployer.deploy(CollectibleRegistry);
 
-  const CollectibleRegistry = CollectibleRegistry.deployed();
+  const registry = await CollectibleRegistry.deployed();
   // deployer.deploy(RaffleFactory);
-  await deployer.deploy(RaffleFactory, CollectibleRegistry.address);
+  await deployer.deploy(RaffleFactory, registry.address);
   await deployer.deploy(Raffle);
   await deployer.deploy(AnyToken);
 };

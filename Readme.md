@@ -6,7 +6,7 @@ npm install
 #Compile
 truffle compile
 
-#rebuild 
+#rebuild on problems
 truffle migrate --reset --all --network ganache
 
 #// Serves the front-end on http://localhost:3000
