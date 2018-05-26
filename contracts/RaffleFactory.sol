@@ -12,7 +12,9 @@ contract RaffleFactory is AragonApp {
 
     event RaffleCreated(
         address indexed raffleOwner, 
-        address indexed raffleAddress
+        address indexed raffleAddress,
+        address indexed erc721Address,
+        uint tokenId
     );
 
     constructor(address _registryAddress) {
@@ -29,10 +31,9 @@ contract RaffleFactory is AragonApp {
         require(collectibleContract.exists(_tokenId));
         require(collectibleContract.ownerOf(_tokenId) == msg.sender);
 
-
         address raffleAddress = new Raffle(_erc721Address, _tokenId);
 
-        emit RaffleCreated(msg.sender, raffleAddress);
+        emit RaffleCreated(msg.sender, raffleAddress, _erc721Address, _tokenId);
         return raffleAddress;
     }
 
