@@ -23,11 +23,14 @@ contract('RaffleFactory', async (accounts) => {
   });
 
   it("Factory should create a Raffle", async () => {
+    await token.mint.sendTransaction({from: org, value: 1});
     const tokenId = await token.tokenOfOwnerByIndex(org, 0);
+
+    console.log('token address', token.address);
 
     console.log('Printed TokenId', tokenId.toNumber());
 
-    const tx = await factory.createNewRaffle('AnyToken', 1, {from: org});
+    const tx = await factory.createNewRaffle(token.address, tokenId.toNumber(), {from: accounts[0] });
     
     const event = tx.logs[0].event;
     const raffleAddress = tx.logs[0].args.raffleAddress;
