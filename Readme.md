@@ -9,6 +9,11 @@ truffle compile
 #rebuild on problems
 truffle migrate --reset --all --network ganache
 
+#having problems?
+rm -r build/
+truffle compile
+truffle migrate --network ganache
+
 #// Serves the front-end on http://localhost:3000
 npm run start
 

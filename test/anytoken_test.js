@@ -3,7 +3,7 @@ const BigNumber = require('bignumber.js');
 const AnyToken = artifacts.require("./AnyToken.sol");
 
 contract("AnyToken", async accounts => {
-  xit("should create contract correctly", async () => {
+  it("should create contract correctly", async () => {
     const instance = await AnyToken.deployed();
 
     assert(instance);
