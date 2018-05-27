@@ -14,6 +14,21 @@ rm -r build/
 truffle compile
 truffle migrate --network ganache
 
+#tools for contracts and debug
+
+#remix-ide
+´´´
+npm install remix-ide -g
+remix-ide
+´´´
+
+#truffle flattener 
+´´´
+npm install truffle-flattener -g
+truffle-flattener contracts/RaffleFactory.sol > debug/DebugFactory.sol
+´´´
+
+
 #// Serves the front-end on http://localhost:3000
 npm run start
 
