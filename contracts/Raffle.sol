@@ -57,17 +57,23 @@ contract Raffle is AragonApp {
     }
 
     function buyTicket() public payable {
-        require(msg.value >= .01 ether);
+        require(msg.value >= ticketPrice, "Ticket price is higher");
+        require(players.length < maxTickets, "All tickets sold out");
+        // TODO: Require that the raffle has not expired/ended.
+        //       This might be for time ended or a winner already declared.
         
         players.push(msg.sender);
     }
     
     function pickWinner() public payable restricted {
+        // At least one player must be subscribed.
         require(players.length > 0);
 
+        // Pick the winner randomly.
         uint index = random() % players.length;
         address tmpWinner = players[index];
 
+        // Transfer the ERC721 token to the winner.
         ERC721 erc721Token = ERC721(selectedAsset.contractAddr);
         erc721Token.transferFrom(
             address(this), tmpWinner, selectedAsset.tokenId);
@@ -93,7 +99,8 @@ contract Raffle is AragonApp {
         return owner == _owner;
     }
 
-    function random() private view returns (uint) {        
+    function random() private view returns (uint) {
+        // TODO: Improve with a stronger random function and entropy sources.
         return uint(keccak256(block.difficulty, now, players));
     }
 }
