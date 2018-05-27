@@ -70,7 +70,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "prestart": "npm run build",
-    "deploy-rinkeby": "truffle migrate --network infuraRinkeby",
+    "deploy-rinkeby": "truffle migrate --network infuraRinkeby"
   },
   "jest": {
     "collectCoverageFrom": [
