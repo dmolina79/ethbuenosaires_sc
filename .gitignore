@@ -2,3 +2,4 @@ build/*
 build_webpack/*
 node_modules/*
 debug/*
+.env
