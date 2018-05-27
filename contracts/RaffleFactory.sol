@@ -27,19 +27,24 @@ contract RaffleFactory is AragonApp {
 
         // Require that the raffle's underlying asset does belong to the
         // creator of the raffle.
-        address owner = msg.sender;
+        //address owner = msg.sender;
         ERC721 erc721Token = ERC721(_erc721Address);
-        require(erc721Token.ownerOf(_tokenId) == owner);
+        require(erc721Token.ownerOf(_tokenId) == msg.sender);
 
         address raffleAddress = new Raffle(
             // Raffle data.
-            owner, _title, _orgName, _length, _ticketPrice, _maxTickets,
+            msg.sender, _title, _orgName, _length, _ticketPrice, _maxTickets,
             _minThreshold,
             // Asset data.
             _erc721Address, _tokenId, _price, _briefDescription);
 
+        // Transfer the asset ownership from the organization to the raffle
+        // contract.
+        // IMPORTANT: This factory contract must have been approved to do such
+        //            a transfer.
+        erc721Token.transferFrom(msg.sender, raffleAddress, _tokenId);
+
         emit RaffleCreated(msg.sender, raffleAddress, _erc721Address, _tokenId);
         return raffleAddress;
     }
-
 }

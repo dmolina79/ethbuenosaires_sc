@@ -1,7 +1,7 @@
 pragma solidity ^0.4.23;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
+import "openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 
 contract Raffle is AragonApp {
@@ -23,6 +23,8 @@ contract Raffle is AragonApp {
 
     // Currently registered player that bought a ticket.
     address[] public players;
+
+    address public winner;
 
 
     constructor(
@@ -55,18 +57,23 @@ contract Raffle is AragonApp {
     }
 
     function buyTicket() public payable {
-        require(msg.value > .01 ether);
+        require(msg.value >= .01 ether);
         
         players.push(msg.sender);
     }
     
-    function pickWinner() public restricted {
+    function pickWinner() public payable restricted {
         require(players.length > 0);
 
         uint index = random() % players.length;
-        address winner = players[index];
-        ERC721Token remoteContract = ERC721Token(selectedAsset.contractAddr);
-        remoteContract.transferFrom(owner, winner, selectedAsset.tokenId);
+        address tmpWinner = players[index];
+
+        ERC721 erc721Token = ERC721(selectedAsset.contractAddr);
+        erc721Token.transferFrom(
+            address(this), tmpWinner, selectedAsset.tokenId);
+
+        // Mutate contract state declaring a winner.
+        winner = tmpWinner;
     }
     
     modifier restricted() {

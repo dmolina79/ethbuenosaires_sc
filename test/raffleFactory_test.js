@@ -39,6 +39,8 @@ contract('RaffleFactory', async (accounts) => {
     const _erc721Address = await token.address;
     // Obtain the tokenId of the first token owned by the org.
     const _erc721TokenId = await token.tokenOfOwnerByIndex(org, 0);
+    // Approve the factory to transfer the asset.
+    await token.approve(factory.address, _erc721TokenId, {from: org});
 
     const tx = await factory.createNewRaffle(
       // Raffle data.
@@ -56,7 +58,12 @@ contract('RaffleFactory', async (accounts) => {
 
     const raffle = new Raffle(raffleAddress);
 
-    // Check raffle data
+    // Check that the raffle owns the underlying token.
+    const tokenOwner = await token.ownerOf(_erc721TokenId, {from: org});
+    assert.strictEqual(tokenOwner, raffleAddress,
+      "The underlying asset must belong to the raffle contract");
+
+    // Check raffle data.
     assert.strictEqual(await raffle.title(), TEST_TITLE);
     assert.strictEqual(await raffle.orgName(), TEST_ORG_NAME);
     assert.strictEqual(

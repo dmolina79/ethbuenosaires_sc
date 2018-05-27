@@ -1,4 +1,5 @@
 require('dotenv').config();
+/*
 const Web3 = require("web3");
 
 const DEFAULT_GAS_WEI = 4600000;
@@ -20,7 +21,7 @@ if(infuraKeyValue === '' || mnemonicKeyValue === '') {
 const gasKeyValue = process.env["GAS_WEI_KEY"] || DEFAULT_GAS_WEI;
 const gasPriceKeyValue = process.env["GAS_PRICE_GWEI_KEY"] || DEFAULT_GAS_GWEI_PRICE;
 
-
+*/
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -29,8 +30,13 @@ module.exports = {
       host: "127.0.0.1",
       port: 7545,
       network_id: "*"
-    },
-    infuraRinkeby: {
+    }
+  }
+};
+
+/**
+ * 
+ *     infuraRinkeby: {
       provider: function() {
         return new HDWalletProvider(mnemonicKeyValue, `https://rinkeby.infura.io/${infuraKeyValue}`, DEFAULT_ADDRESS_INDEX, addressCountValue);
       },
@@ -38,5 +44,5 @@ module.exports = {
       gasPrice: web3.utils.toWei(gasPriceKeyValue, "gwei"),
       network_id: "5",
     },
-  }
-};
+
+ */
