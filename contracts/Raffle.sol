@@ -15,11 +15,11 @@ contract Raffle is AragonApp {
     address private owner;
     string public title;
     string public orgName;
-    uint16 length;
-    uint256 ticketPrice;
-    uint32 maxTickets;
-    uint256 minThreshold;
-    Asset selectedAsset;
+    uint16 public length;
+    uint256 public ticketPrice;
+    uint32 public maxTickets;
+    uint256 public minThreshold;
+    Asset public selectedAsset;
 
     // Currently registered player that bought a ticket.
     address[] public players;
