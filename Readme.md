@@ -40,15 +40,3 @@ https://github.com/truffle-box/react-box
 Install Ganache:
 http://truffleframework.com/ganache/
 
-TODO:
-
-Contract TODOs:
-*add factory contract for raffles
-*add ERC 721 contract
-*add Raffle Contract
-*accept collectible as donation
-*accept raffle participants
-*assign winner and transfer asset (random ticket)
-
-Interface TODOs:
-*?
